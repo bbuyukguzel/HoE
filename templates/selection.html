@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Title</title>
+
+    <!-- Bootstrap -->
+    <link href="https://bootswatch.com/darkly/bootstrap.min.css" rel="stylesheet">
+
+
+<!-- JCrop -->
+<link rel="stylesheet" href="static/css/jquery.Jcrop.min.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-8 col-md-offset-2">
+
+
+            <div class="col-md-*" id="url-panel">
+
+                <h2>Panel Heading</h2>
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="#" class="active" id="url-link">Target URL</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" id="selection-link">Area Selection</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" id="settings-link">Settings</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <span class='zoom' id='ex1'>
+                            <img src="{{ img }}" alt="mirror of given url" id="mirror">
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-*" id="selection-panel"></div>
+
+
+        </div>
+    </div><!-- /row -->
+</div><!-- /container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="static/js/bootstrap.min.js"></script>
+
+<script src='static/js/jquery.Jcrop.min.js'></script>
+
+<script type="text/javascript">
+        (function ($) {
+        var jcrop_api;
+        $('#mirror').Jcrop({
+            onSelect: showCoords,
+        }, function () {
+            jcrop_api = this;
+        });
+        $('#coords').on('change', 'input', function (e) {
+            var x1 = $('#x1').val(),
+                    x2 = $('#x2').val(),
+                    y1 = $('#y1').val(),
+                    y2 = $('#y2').val();
+            jcrop_api.setSelect([x1, y1, x2, y2]);
+        });
+    })( jQuery );
+
+    function showCoords(c) {
+        // x1, y1, x2, y2, w, h
+        console.log(c.x, c.y, c.x2, c.y2, c.w, c.h);
+        var mx = (c.x+c.x2)/2;
+        var my = (c.y+c.y2)/2;
+        console.log(mx, my)
+
+    }
+    ;
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
